@@ -1,5 +1,5 @@
 # modt
-Custom tenbyte modts
+Custom tenbyte motds
 
 Ubuntu:
 
