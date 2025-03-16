@@ -31,18 +31,18 @@ echo -e "                            |___/         ${RESET}"
 echo -e ""
 echo -e "${BOLD}${BLUE}       POWERED BY TENBYTE ${RESET}\n"
 
-IP=\$(hostname -I | awk '{print \$1}')
-UPTIME=\$(uptime -p)
-MEMORY=\$(free -h | grep Mem | awk '{print \$3 "/" \$2}')
-LOAD=\$(cat /proc/loadavg | awk '{print \$1", "\$2", "\$3}')
-USERS=\$(who | wc -l)
+IP=$(hostname -I | awk '{print $1}')
+UPTIME=$(uptime -p)
+MEMORY=$(free -h | grep Mem | awk '{print $3 "/" $2}')
+LOAD=$(cat /proc/loadavg | awk '{print $1", "$2", "$3}')
+USERS=$(who | wc -l)
 
 echo -e "${WHITE}-----------------------------------------${RESET}"
-echo -e "${BLUE}  Hostname:   ${WHITE}\$(hostname)${RESET}"
-echo -e "${BLUE}  Server IP:  ${WHITE}\$IP${RESET}"
-echo -e "${BLUE}  Uptime:     ${WHITE}\$UPTIME${RESET}"
-echo -e "${BLUE}  RAM Usage:  ${WHITE}\$MEMORY${RESET}"
-echo -e "${BLUE}  Load Avg:   ${WHITE}\$LOAD${RESET}"
+echo -e "${BLUE}  Hostname:   ${WHITE}$(hostname)${RESET}"
+echo -e "${BLUE}  Server IP:  ${WHITE}$IP${RESET}"
+echo -e "${BLUE}  Uptime:     ${WHITE}$UPTIME${RESET}"
+echo -e "${BLUE}  RAM Usage:  ${WHITE}$MEMORY${RESET}"
+echo -e "${BLUE}  Load Avg:   ${WHITE}$LOAD${RESET}"
 echo -e "${WHITE}-----------------------------------------${RESET}"
 EOF
 
