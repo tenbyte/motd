@@ -2,7 +2,7 @@
 
 echo "Setting up TENBYTE custom MOTD..."
 
-MOTD_URL="https://raw.githubusercontent.com/tenbyte/modt/refs/heads/main/ubuntu/modt"
+MOTD_URL="https://raw.githubusercontent.com/tenbyte/motd/refs/heads/main/ubuntu/motd"
 MOTD_SCRIPT="/etc/update-motd.d/99-tenbyte-motd"
 
 echo "Downloading MOTD script..."
