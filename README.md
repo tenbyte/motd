@@ -1,4 +1,4 @@
-# modt
+# motd
 Custom tenbyte motds
 
 Ubuntu:
