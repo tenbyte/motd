@@ -5,11 +5,11 @@ echo "Checking for an existing TENBYTE MOTD..."
 MOTD_URL="https://raw.githubusercontent.com/tenbyte/motd/refs/heads/main/ubuntu/motd"
 MOTD_SCRIPT="/etc/update-motd.d/99-tenbyte-motd"
 
-if [[ -f "$MOTD_SCRIPT" ]] && grep -q "POWERED BY TENBYTE" "$MOTD_SCRIPT"; then
+if [[ -f "$MOTD_SCRIPT" ]]; then
     echo "Existing TENBYTE MOTD found. Overwriting..."
     sudo wget -O "$MOTD_SCRIPT" "$MOTD_URL"
 else
-    echo "No existing TENBYTE MOTD found or another MOTD is in use. No changes made."
+    echo "No TENBYTE MOTD found. Leaving existing MOTD unchanged."
     exit 0
 fi
 
