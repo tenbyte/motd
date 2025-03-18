@@ -11,7 +11,6 @@ else
     echo "No TENBYTE MOTD found. Adding a new one..."
 fi
 
-# Download oder Überschreiben des MOTD
 sudo wget -O "$MOTD_SCRIPT" "$MOTD_URL"
 
 echo "Making the TENBYTE MOTD script executable..."
