@@ -21,11 +21,14 @@ IP=$(hostname -I | awk '{print $1}')
 UPTIME=$(uptime -p)
 MEMORY=$(free -h | awk '/Mem/ {print $3 "/" $2}')
 LOAD=$(awk '{print $1", "$2", "$3}' /proc/loadavg)
-USERS=$(who | wc -l)
+WANIP6=$(curl -s -k -m 5 -6 https://api64.ipify.org)
+WANIP4=$(curl -s -k -m 5 -4 https://api64.ipify.org)
 
 echo -e "${WHITE}-----------------------------------------${RESET}"
 echo -e "${BLUE}  Hostname:   ${WHITE}$(hostname)${RESET}"
 echo -e "${BLUE}  Server IP:  ${WHITE}$IP${RESET}"
+echo -e "${BLUE}  WAN IPv4:   ${WHITE}${WANIP4:-N/A}${RESET}"
+echo -e "${BLUE}  WAN IPv6:   ${WHITE}${WANIP6:-N/A}${RESET}"
 echo -e "${BLUE}  Distro:     ${WHITE}$DISTRO${RESET}"
 echo -e "${BLUE}  Uptime:     ${WHITE}$UPTIME${RESET}"
 echo -e "${BLUE}  RAM Usage:  ${WHITE}$MEMORY${RESET}"
