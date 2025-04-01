@@ -20,8 +20,8 @@ IP=$(hostname -I | awk '{print $1}')
 UPTIME=$(uptime -p)
 MEMORY=$(free -h | awk '/Mem/ {print $3 "/" $2}')
 LOAD=$(awk '{print $1", "$2", "$3}' /proc/loadavg)
-WANIP6=$(curl -s -k -m 5 -6 https://api64.ipify.org)
-WANIP4=$(curl -s -k -m 5 -4 https://api64.ipify.org)
+WANIP4=$(ip -4 addr show scope global | grep inet | awk '{print $2}' | cut -d/ -f1 | head -n1)
+WANIP6=$(ip -6 addr show scope global | grep inet6 | grep -v 'temporary' | awk '{print $2}' | cut -d/ -f1 | head -n1)
 
 echo -e "${WHITE}-----------------------------------------${RESET}"
 echo -e "${CYAN}  Hostname:   ${WHITE}$(hostname)${RESET}"
