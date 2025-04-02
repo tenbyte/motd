@@ -1,7 +1,7 @@
 #!/bin/bash
 
 CYAN="\033[36m"
-WHITE="\033[37m"
+WHITE="\033[0m"
 BOLD="\033[1m"
 RESET="\033[0m"
 
