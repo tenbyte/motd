@@ -20,6 +20,11 @@ wget -O activate.sh https://raw.githubusercontent.com/tenbyte/motd/refs/heads/ma
 ```
 
 ### Mac:
+install:
 ```bash
 curl -fsSL https://raw.githubusercontent.com/tenbyte/motd/refs/heads/main/mac/activate.sh | bash
+```
+restore:
+```bash
+curl -fsSL https://raw.githubusercontent.com/tenbyte/motd/refs/heads/main/mac/restore.sh -o /tmp/tenbyte-restore.sh && bash /tmp/tenbyte-restore.sh && rm /tmp/tenbyte-restore.sh
 ```
