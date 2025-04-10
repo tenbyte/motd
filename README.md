@@ -15,9 +15,19 @@ wget -O restore.sh https://raw.githubusercontent.com/tenbyte/motd/refs/heads/mai
 
 
 ### Rhel:
+
+Install:
 ```bash
 wget -O activate.sh https://raw.githubusercontent.com/tenbyte/motd/refs/heads/main/rhel/activate.sh && chmod +x activate.sh && ./activate.sh
 ```
+
+restore:
+```bash
+wget -O remove.sh https://raw.githubusercontent.com/tenbyte/motd/refs/heads/main/rhel/remove.sh && chmod +x remove.sh && ./remove.sh
+```
+
+
+
 
 ### Mac:
 install:
