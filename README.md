@@ -23,7 +23,7 @@ wget -O activate.sh https://raw.githubusercontent.com/tenbyte/motd/refs/heads/ma
 
 restore:
 ```bash
-wget -O remove.sh https://raw.githubusercontent.com/tenbyte/motd/refs/heads/main/rhel/remove.sh && chmod +x remove.sh && ./remove.sh
+wget -O restore.sh https://raw.githubusercontent.com/tenbyte/motd/refs/heads/main/rhel/restore.sh && chmod +x restore.sh && ./restore.sh
 ```
 
 
