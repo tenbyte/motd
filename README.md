@@ -27,8 +27,6 @@ wget -O restore.sh https://raw.githubusercontent.com/tenbyte/motd/refs/heads/mai
 ```
 
 
-
-
 ### Mac:
 install:
 ```bash
