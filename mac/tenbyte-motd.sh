@@ -7,8 +7,8 @@ RESET="\033[0m"
 
 DISTRO=$(sw_vers -productName)" "$(sw_vers -productVersion)
 IP=$(ipconfig getifaddr en0)
-WANIP4=$(curl -s https://ipv4.tenbyte.dev/plain)
-WANIP6=$(curl -s https://ipv6.tenbyte.dev/plain)
+WANIP4=$(curl -s --max-time 2 https://ipv4.tenbyte.dev/plain || echo "N/A")
+WANIP6=$(curl -s --max-time 2 https://ipv6.tenbyte.dev/plain || echo "N/A")
 UPTIME=$(uptime | awk -F'( |,|:)+' '{print $6 "h " $7 "m"}')
 LOAD=$(uptime | awk -F'load averages?: ' '{print $2}')
 
