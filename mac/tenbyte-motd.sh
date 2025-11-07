@@ -6,9 +6,10 @@ BOLD="\033[1m"
 RESET="\033[0m"
 
 DISTRO=$(sw_vers -productName)" "$(sw_vers -productVersion)
-LOCALIP4=$(ipconfig getifaddr "$(route -n get default 2>/dev/null | awk '/interface:/{print $2}')" 2>/dev/null)
+LOCALIP4=$(ifconfig | grep "inet " | grep -v 127.0.0.1 | awk '{print $2}' | head -n 1)
 WANIP4=$(curl -s --connect-timeout 1 --max-time 2 https://ipv4.tenbyte.dev/plain || echo "N/A")
 WANIP6=$(curl -s --connect-timeout 1 --max-time 2 https://ipv6.tenbyte.dev/plain || echo "N/A")
+
 UPTIME=$(uptime | awk -F'( |,|:)+' '{print $6 "h " $7 "m"}')
 LOAD=$(uptime | awk -F'load averages?: ' '{print $2}')
 
@@ -25,7 +26,7 @@ echo -e "${WHITE}-----------------------------------------${RESET}"
 echo -e "${CYAN}  Hostname:   ${WHITE}$(scutil --get LocalHostName)${RESET}"
 echo -e "${CYAN}  WAN IPv4:   ${WHITE}${WANIP4:-N/A}${RESET}"
 echo -e "${CYAN}  WAN IPv6:   ${WHITE}${WANIP6:-N/A}${RESET}"
-echo -e "${CYAN}  Local IPv4: ${WHITE}${LOCALIP4:-N/A}${RESET}" # Jetzt sollte die IP da sein
+echo -e "${CYAN}  Local IPv4: ${WHITE}${LOCALIP4:-N/A}${RESET}" 
 echo -e "${CYAN}  Distro:     ${WHITE}${DISTRO}${RESET}"
 echo -e "${CYAN}  Uptime:     ${WHITE}${UPTIME}${RESET}"
 echo -e "${CYAN}  Load Avg:   ${WHITE}${LOAD}${RESET}"
