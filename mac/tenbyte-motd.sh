@@ -23,26 +23,12 @@ WANIP4=""
 WANIP6=""
 
 WAN_CACHE_FILE="/tmp/tenbyte_motd_wan.cache"
-WAN_CACHE_TTL=300
 
 read_wan_cache() {
 	if [[ -f "$WAN_CACHE_FILE" ]]; then
 		WANIP4=$(awk -F= '/^WANIP4=/{print $2}' "$WAN_CACHE_FILE" 2>/dev/null)
 		WANIP6=$(awk -F= '/^WANIP6=/{print $2}' "$WAN_CACHE_FILE" 2>/dev/null)
 	fi
-}
-
-wan_cache_is_fresh() {
-	if [[ ! -f "$WAN_CACHE_FILE" ]]; then
-		return 1
-	fi
-
-	local now
-	local cache_mtime
-	now=$(date +%s)
-	cache_mtime=$(stat -f %m "$WAN_CACHE_FILE" 2>/dev/null || echo 0)
-
-	(( now - cache_mtime <= WAN_CACHE_TTL ))
 }
 
 refresh_wan_cache_async() {
@@ -59,10 +45,19 @@ refresh_wan_cache_async() {
 	) >/dev/null 2>&1 &
 }
 
+quick_fetch_wan_if_empty() {
+	if [[ -z "$WANIP4" ]]; then
+		WANIP4=$(curl -4 -s --connect-timeout 0.2 --max-time 0.4 https://ipv4.tenbyte.dev/plain || true)
+	fi
+
+	if [[ -z "$WANIP6" ]]; then
+		WANIP6=$(curl -6 -s --connect-timeout 0.2 --max-time 0.4 https://ipv6.tenbyte.dev/plain || true)
+	fi
+}
+
 read_wan_cache
-if ! wan_cache_is_fresh; then
-	refresh_wan_cache_async
-fi
+refresh_wan_cache_async
+quick_fetch_wan_if_empty
 
 UPTIME=$(uptime | awk -F'( |,|:)+' '{print $6 "h " $7 "m"}')
 
