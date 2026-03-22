@@ -8,7 +8,7 @@ DIM="\033[2m"
 RESET="\033[0m"
 
 LABEL_WIDTH=11
-VALUE_WIDTH=43
+VALUE_WIDTH=22
 
 HOSTNAME=$(scutil --get LocalHostName 2>/dev/null || hostname)
 OS_NAME=$(sw_vers -productName)
