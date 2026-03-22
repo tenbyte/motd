@@ -19,8 +19,50 @@ MEM_BYTES=$(sysctl -n hw.memsize 2>/dev/null)
 SHELL_NAME=$(basename "${SHELL:-unknown}")
 
 LOCALIP4=$(ipconfig getifaddr en0 2>/dev/null || ipconfig getifaddr en1 2>/dev/null)
-WANIP4=$(curl -s --connect-timeout 1 --max-time 2 https://ipv4.tenbyte.dev/plain)
-WANIP6=$(curl -s --connect-timeout 1 --max-time 2 https://ipv6.tenbyte.dev/plain)
+WANIP4=""
+WANIP6=""
+
+WAN_CACHE_FILE="/tmp/tenbyte_motd_wan.cache"
+WAN_CACHE_TTL=300
+
+read_wan_cache() {
+	if [[ -f "$WAN_CACHE_FILE" ]]; then
+		WANIP4=$(awk -F= '/^WANIP4=/{print $2}' "$WAN_CACHE_FILE" 2>/dev/null)
+		WANIP6=$(awk -F= '/^WANIP6=/{print $2}' "$WAN_CACHE_FILE" 2>/dev/null)
+	fi
+}
+
+wan_cache_is_fresh() {
+	if [[ ! -f "$WAN_CACHE_FILE" ]]; then
+		return 1
+	fi
+
+	local now
+	local cache_mtime
+	now=$(date +%s)
+	cache_mtime=$(stat -f %m "$WAN_CACHE_FILE" 2>/dev/null || echo 0)
+
+	(( now - cache_mtime <= WAN_CACHE_TTL ))
+}
+
+refresh_wan_cache_async() {
+	(
+		local ip4
+		local ip6
+		ip4=$(curl -4 -s --connect-timeout 1 --max-time 1 https://ipv4.tenbyte.dev/plain || true)
+		ip6=$(curl -6 -s --connect-timeout 1 --max-time 1 https://ipv6.tenbyte.dev/plain || true)
+		{
+			printf "WANIP4=%s\n" "$ip4"
+			printf "WANIP6=%s\n" "$ip6"
+		} > "${WAN_CACHE_FILE}.tmp"
+		mv "${WAN_CACHE_FILE}.tmp" "$WAN_CACHE_FILE"
+	) >/dev/null 2>&1 &
+}
+
+read_wan_cache
+if ! wan_cache_is_fresh; then
+	refresh_wan_cache_async
+fi
 
 UPTIME=$(uptime | awk -F'( |,|:)+' '{print $6 "h " $7 "m"}')
 
