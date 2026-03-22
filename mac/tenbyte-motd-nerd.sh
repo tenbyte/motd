@@ -1,7 +1,7 @@
 #!/bin/bash
 
 CYAN="\033[36m"
-GREEN="\033[32m"
+BLUE="\033[0;34m"
 WHITE="\033[37m"
 BOLD="\033[1m"
 DIM="\033[2m"
@@ -36,7 +36,7 @@ print_row() {
 	local label="$2"
 	local value="$3"
 	value=$(printf "%s" "$value" | tr '\n\t' '  ')
-	printf "${WHITE}| ${GREEN}%-2s ${CYAN}%-*.*s ${WHITE}| ${WHITE}%-*.*s ${WHITE}|${RESET}\n" \
+	printf "${WHITE}| ${BLUE}%-2s ${CYAN}%-*.*s ${WHITE}| ${WHITE}%-*.*s ${WHITE}|${RESET}\n" \
 		"$icon" "$LABEL_WIDTH" "$LABEL_WIDTH" "$label" "$VALUE_WIDTH" "$VALUE_WIDTH" "$value"
 }
 
