@@ -36,7 +36,7 @@ print_row() {
 	local label="$2"
 	local value="$3"
 	value=$(printf "%s" "$value" | tr '\n\t' '  ')
-	printf "${WHITE}| ${BLUE}%-2s ${CYAN}%-*.*s ${WHITE}| ${WHITE}%-*.*s ${WHITE}|${RESET}\n" \
+	printf "${WHITE}| ${BLUE}%-2s ${CYAN}%-*.*s   ${WHITE}| ${WHITE}%-*.*s ${WHITE}|${RESET}\n" \
 		"$icon" "$LABEL_WIDTH" "$LABEL_WIDTH" "$label" "$VALUE_WIDTH" "$VALUE_WIDTH" "$value"
 }
 
@@ -48,7 +48,7 @@ repeat_char() {
 
 print_top_border() {
 	printf "${WHITE}+"
-	repeat_char $((LABEL_WIDTH + 5)) "-"
+	repeat_char $((LABEL_WIDTH + 6)) "-"
 	printf "+"
 	repeat_char $((VALUE_WIDTH + 2)) "-"
 	printf "+${RESET}\n"
@@ -56,7 +56,7 @@ print_top_border() {
 
 print_bottom_border() {
 	printf "${WHITE}+"
-	repeat_char $((LABEL_WIDTH + 5)) "-"
+	repeat_char $((LABEL_WIDTH + 6)) "-"
 	printf "+"
 	repeat_char $((VALUE_WIDTH + 2)) "-"
 	printf "+${RESET}\n"
