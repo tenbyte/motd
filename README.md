@@ -28,11 +28,19 @@ wget -O restore.sh https://raw.githubusercontent.com/tenbyte/motd/refs/heads/mai
 
 
 ### Mac:
-install:
+Install (standard):
 ```bash
 curl -fsSL https://raw.githubusercontent.com/tenbyte/motd/refs/heads/main/mac/activate.sh | bash
 ```
-restore:
+Install (nerd icons):
+```bash
+curl -fsSL https://raw.githubusercontent.com/tenbyte/motd/refs/heads/main/mac/activate-nerd.sh | bash
+```
+Uninstall:
+```bash
+curl -fsSL https://raw.githubusercontent.com/tenbyte/motd/refs/heads/main/mac/uninstall.sh -o /tmp/tenbyte-uninstall.sh && bash /tmp/tenbyte-uninstall.sh && rm /tmp/tenbyte-uninstall.sh
+```
+Restore (legacy):
 ```bash
 curl -fsSL https://raw.githubusercontent.com/tenbyte/motd/refs/heads/main/mac/restore.sh -o /tmp/tenbyte-restore.sh && bash /tmp/tenbyte-restore.sh && rm /tmp/tenbyte-restore.sh
 ```
