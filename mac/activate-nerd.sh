@@ -9,7 +9,7 @@ MOTD_SCRIPT="$HOME/.tenbyte_motd.sh"
 ZPROFILE="$HOME/.zprofile"
 BASH_PROFILE="$HOME/.bash_profile"
 ZSHRC="$HOME/.zshrc"
-PROMPT_LINE="PROMPT='%F{cyan}󰄾%f %F{white}%n%f %F{blue}❯%f '"
+PROMPT_LINE="PROMPT='%F{cyan}󰄾%f %F{white}%n%f %F{blue}%~%f %F{blue}❯%f '"
 
 for PROFILE in "$ZPROFILE" "$BASH_PROFILE"; do
     if [[ -f "$PROFILE" ]]; then
