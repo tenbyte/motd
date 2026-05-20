@@ -45,6 +45,20 @@ Restore (legacy):
 curl -fsSL https://raw.githubusercontent.com/tenbyte/motd/refs/heads/main/mac/restore.sh -o /tmp/tenbyte-restore.sh && bash /tmp/tenbyte-restore.sh && rm /tmp/tenbyte-restore.sh
 ```
 
+### Windows:
+Install (PowerShell 7):
+```powershell
+iwr https://raw.githubusercontent.com/tenbyte/motd/refs/heads/main/windows/activate.ps1 -OutFile activate.ps1; powershell -ExecutionPolicy Bypass -File .\activate.ps1; Remove-Item .\activate.ps1
+```
+Install (also hook legacy Windows PowerShell 5.1):
+```powershell
+iwr https://raw.githubusercontent.com/tenbyte/motd/refs/heads/main/windows/activate.ps1 -OutFile activate.ps1; powershell -ExecutionPolicy Bypass -File .\activate.ps1 -IncludeWindowsPowerShell; Remove-Item .\activate.ps1
+```
+Restore:
+```powershell
+iwr https://raw.githubusercontent.com/tenbyte/motd/refs/heads/main/windows/restore.ps1 -OutFile restore.ps1; powershell -ExecutionPolicy Bypass -File .\restore.ps1; Remove-Item .\restore.ps1
+```
+
 ### Slackware/unRAID:
 Install:
 ```bash
